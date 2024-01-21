@@ -5,8 +5,8 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"go-key/config"
-	"go-key/keycloak"
+	"github.com/halflifeviper/keycloak/config"
+	"github.com/halflifeviper/keycloak/keycloakservice"
 )
 
 // createInstanceCmd represents the createInstance command
@@ -20,7 +20,7 @@ var createInstanceCmd = &cobra.Command{
 			return
 		}
 
-		if err := keycloak.CreateKeyCloak(cf); err != nil {
+		if err := keycloakservice.CreateKeyCloak(cf); err != nil {
 			log.Println(err)
 		}	
 	},
