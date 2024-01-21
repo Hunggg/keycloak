@@ -1,4 +1,4 @@
-package keycloak
+package keycloakservice
 
 import (
 	"log"
@@ -6,9 +6,10 @@ import (
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
 
-	"go-key/config"
+	"github.com/halflifeviper/keycloak/config"
 )
-func CreateSessionAws(config *config.Config) (*session.Session, error){
+
+func CreateSessionAws(config *config.Config) (*session.Session, error) {
 
 	// Set up an AWS session
 	sess, err := session.NewSession(&aws.Config{

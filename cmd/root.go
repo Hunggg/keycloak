@@ -9,15 +9,15 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"go-key/config"
-	"go-key/keycloak"
+	"github.com/halflifeviper/keycloak/config"
+	keycloak "github.com/halflifeviper/keycloak/keycloakservice"
 )
 
 // rootCmd represents the root command
 var rootCmd = &cobra.Command{
 	Use:   "root",
 	Short: "root command",
-	Long: `Root command line`,
+	Long:  `Root command line`,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("root called")
 		cf, err := config.Get_Config()
@@ -31,7 +31,7 @@ var rootCmd = &cobra.Command{
 
 func Execute() {
 	if err := rootCmd.Execute(); err != nil {
-	  fmt.Println(err)
-	  os.Exit(1)
+		fmt.Println(err)
+		os.Exit(1)
 	}
-  }
+}

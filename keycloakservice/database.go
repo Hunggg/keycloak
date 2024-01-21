@@ -1,4 +1,4 @@
-package keycloak
+package keycloakservice
 
 import (
 	"log"
@@ -6,7 +6,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/rds"
 
-	"go-key/config"
+	"github.com/halflifeviper/keycloak/config"
 )
 
 func CreatePostgres(cf *config.Config) error {
@@ -26,15 +26,15 @@ func CreatePostgres(cf *config.Config) error {
 	}
 
 	params := &rds.CreateDBInstanceInput{
-		AllocatedStorage: aws.Int64(cf.Database.Postgres.AllocatedStorage),
-		DBInstanceIdentifier: aws.String(cf.Database.Postgres.Name),
-		DBInstanceClass: aws.String(cf.Database.Postgres.InstanceClass),
-		Engine: aws.String(cf.Database.Postgres.Engine),
-		MasterUsername: aws.String(cf.Database.Postgres.UserName),
-		MasterUserPassword: aws.String(cf.Database.Postgres.Password),
-		DBName: aws.String(cf.Database.Postgres.Name),
+		AllocatedStorage:        aws.Int64(cf.Database.Postgres.AllocatedStorage),
+		DBInstanceIdentifier:    aws.String(cf.Database.Postgres.Name),
+		DBInstanceClass:         aws.String(cf.Database.Postgres.InstanceClass),
+		Engine:                  aws.String(cf.Database.Postgres.Engine),
+		MasterUsername:          aws.String(cf.Database.Postgres.UserName),
+		MasterUserPassword:      aws.String(cf.Database.Postgres.Password),
+		DBName:                  aws.String(cf.Database.Postgres.Name),
 		AutoMinorVersionUpgrade: aws.Bool(true),
-		PubliclyAccessible: aws.Bool(false),
+		PubliclyAccessible:      aws.Bool(false),
 	}
 
 	result, err := rdsClient.CreateDBInstance(params)

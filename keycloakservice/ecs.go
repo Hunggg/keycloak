@@ -1,13 +1,13 @@
-package keycloak
+package keycloakservice
 
 import (
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/ecs"
 
-	"go-key/config"
+	"github.com/halflifeviper/keycloak/config"
 )
 
-func RegisterTask(cf *config.Config) (string, error){
+func RegisterTask(cf *config.Config) (string, error) {
 	session, err := CreateSessionAws(cf)
 	if err != nil {
 		return "", err
@@ -16,8 +16,8 @@ func RegisterTask(cf *config.Config) (string, error){
 
 	// Specify the container definition for the task
 	containerDefinition := &ecs.ContainerDefinition{
-		Name:  aws.String(cf.ECS.KeyCloak.Name),
-		Image: aws.String(cf.ECS.KeyCloak.Image),
+		Name:   aws.String(cf.ECS.KeyCloak.Name),
+		Image:  aws.String(cf.ECS.KeyCloak.Image),
 		Memory: aws.Int64(cf.ECS.KeyCloak.Memory),
 	}
 
@@ -38,10 +38,10 @@ func RegisterTask(cf *config.Config) (string, error){
 	return *result.TaskDefinition.TaskDefinitionArn, nil
 }
 
-func CreateECS(cf *config.Config) (string, error){
+func CreateECS(cf *config.Config) (string, error) {
 	session, err := CreateSessionAws(cf)
 	if err != nil {
-		return  "", err
+		return "", err
 	}
 	ecsClient := ecs.New(session)
 
@@ -62,4 +62,3 @@ func CreateECS(cf *config.Config) (string, error){
 
 	return *result.Cluster.ClusterArn, nil
 }
-

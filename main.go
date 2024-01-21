@@ -2,8 +2,9 @@ package main
 
 import (
 	"fmt"
-	"go-key/cmd"
-	"go-key/config"
+
+	"github.com/halflifeviper/keycloak/cmd"
+	"github.com/halflifeviper/keycloak/config"
 )
 
 func main() {
